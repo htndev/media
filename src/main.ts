@@ -17,7 +17,7 @@ async function bootstrap() {
   app.disable('x-powered-by');
   app.use(compression());
   if (config.isDevMode) {
-    setupSwagger(app);
+    setupSwagger(app, config);
   }
 
   await app.listen(config.port);
