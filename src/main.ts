@@ -1,11 +1,10 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import * as compression from 'compression';
+import { AppConfig, setupSwagger } from '@xbeat/server-toolkit';
+import compression from 'compression';
 
 import { AppModule } from './app.module';
-import { setupSwagger } from './common/dev/swagger';
-import { AppConfig } from './common/providers/config/app.config';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
@@ -17,7 +16,7 @@ async function bootstrap() {
   app.disable('x-powered-by');
   app.use(compression());
   if (config.isDevMode) {
-    setupSwagger(app, config);
+    setupSwagger(app, await import('../package.json'));
   }
 
   await app.listen(config.port);

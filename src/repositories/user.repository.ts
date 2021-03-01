@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { Maybe } from '@xbeat/toolkit';
 import { EntityRepository, Repository } from 'typeorm';
 
-import { Maybe } from '../common/utils/types.util';
 import { User } from '../entities/user.entity';
 
 @Injectable()

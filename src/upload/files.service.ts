@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { AppConfig } from '@xbeat/server-toolkit';
 import { Response } from 'express';
 
 import { Errors } from '../common/constants/error.constant';
-import { AppConfig } from '../common/providers/config/app.config';
 import { UploaderService } from '../common/providers/uploader/uploader.service';
 import { UuidService } from '../common/providers/uuid/uuid.service';
 import { mapAsync } from '../common/utils/async-iterators.util';
@@ -42,7 +42,7 @@ export class FilesService {
 
       await newMediaFile.save();
 
-      return `${this.appConfig.apiUrl}/files/${newMediaFile.uuid}`;
+      return `${this.appConfig.url}/${this.appConfig.apiVersion}/files/${newMediaFile.uuid}`;
     });
 
     return this.formatResponse(_files);

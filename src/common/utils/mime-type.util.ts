@@ -1,5 +1,7 @@
+import { Nullable } from '@xbeat/toolkit';
+
 import { AUDIO_MIMETYPE, IMAGE_MIMETYPE } from '../constants/file-formats.constants';
-import { File, Nullable, UploadFile } from './types.util';
+import { File, UploadFile } from './types.util';
 
 export const mimeTypeRegexp = (type: string, formats: string[]): RegExp =>
   new RegExp(`${type}\/(${formats.join('|')})`);

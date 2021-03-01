@@ -1,4 +1,3 @@
-import { Errors } from './../common/constants/error.constant';
 import {
   Controller,
   Get,
@@ -12,16 +11,17 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { RestJwtGuard } from '@xbeat/server-toolkit';
 import { Response } from 'express';
 
 import { AUDIO_FORMATS, IMAGE_FORMATS } from '../common/constants/file-formats.constants';
-import { JwtGuard } from '../common/guards/jwt.guard';
 import { CloudConfig } from '../common/providers/config/cloud.config';
 import { ValidationService } from '../common/providers/validation/validation.service';
 import { isAudio, isImage } from '../common/utils/mime-type.util';
 import { ApiResponse as CloudApiResponse, File, FilesStrategy, UploadFile } from '../common/utils/types.util';
 import { MaxFilesAmountValidator } from '../common/validators/max-files-amount.validator';
 import { MimetypeValidator } from '../common/validators/mime-type.validator';
+import { Errors } from './../common/constants/error.constant';
 import { FilesService } from './files.service';
 import { FileSizeValidator } from './validators/file-size.validator';
 import { IncludeFilesValidator } from './validators/include-files.validator';
@@ -35,7 +35,7 @@ export class FilesController {
     private readonly validationService: ValidationService
   ) {}
 
-  @UseGuards(JwtGuard)
+  @UseGuards(RestJwtGuard)
   @Post()
   @UseInterceptors(FilesInterceptor('files'))
   @ApiConsumes('multipart/form-data')

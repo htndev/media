@@ -1,7 +1,7 @@
+import { EnhancedBaseEntity } from '@xbeat/server-toolkit';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 import { UploadFile } from '../common/utils/types.util';
-import { EnhancedBaseEntity } from './enhanced-base.entity';
 
 @Entity({ name: 'media_files' })
 export class MediaFile extends EnhancedBaseEntity {

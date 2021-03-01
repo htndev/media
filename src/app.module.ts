@@ -1,12 +1,10 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { DatabaseConfig, NodeEnvironment, RequestLoggerMiddleware } from '@xbeat/server-toolkit';
 
 import { CommonModule } from './common/common.module';
-import { NodeEnv } from './common/constants/env.constant';
-import { LoggingMiddleware } from './common/middlewares/logging.middleware';
 import { ConfigModule as ConfigManagerModule } from './common/providers/config/config.module';
-import { DatabaseConfig } from './common/providers/config/database.config';
 import { UuidModule } from './common/providers/uuid/uuid.module';
 import { FilesModule } from './upload/files.module';
 
@@ -15,7 +13,7 @@ import { FilesModule } from './upload/files.module';
     UuidModule,
     ConfigModule.forRoot({
       envFilePath: '.dev.env',
-      ignoreEnvFile: process.env.NODE_ENV === NodeEnv.PRODUCTION
+      ignoreEnvFile: process.env.NODE_ENV === NodeEnvironment.PRODUCTION
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigManagerModule],
@@ -50,6 +48,6 @@ import { FilesModule } from './upload/files.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggingMiddleware).forRoutes('*');
+    consumer.apply(RequestLoggerMiddleware).forRoutes('*');
   }
 }

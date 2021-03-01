@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
+import { AppConfig, DatabaseConfig } from '@xbeat/server-toolkit';
 
-import { AppConfig } from './app.config';
 import { CloudConfig } from './cloud.config';
-import { DatabaseConfig } from './database.config';
 
 @Module({
   providers: [AppConfig, DatabaseConfig, CloudConfig],

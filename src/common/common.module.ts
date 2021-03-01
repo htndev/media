@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { AppConfig } from '@xbeat/server-toolkit';
 
-import { AppConfig } from './providers/config/app.config';
 import { ConfigModule } from './providers/config/config.module';
 
 @Module({
