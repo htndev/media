@@ -8,7 +8,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, { cors: true });
   const config = app.get(AppConfig);
 
   app.useGlobalPipes(new ValidationPipe());

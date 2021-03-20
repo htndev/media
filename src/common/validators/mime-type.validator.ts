@@ -4,7 +4,7 @@ import { File, MimetypeValidatorFunction } from '../utils/types.util';
 import { BaseValidator } from './base.validator';
 
 export class MimetypeValidator implements BaseValidator<File[]> {
-  private isValid: MimetypeValidatorFunction = (mimetype: string) => false;
+  private isValid: MimetypeValidatorFunction = () => false;
 
   constructor(
     readonly formats: string[],
